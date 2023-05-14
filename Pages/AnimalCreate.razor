@@ -1,0 +1,78 @@
+﻿@using stGenetics.Services
+@using AnimalModel.Model
+@inject IAnimalService AnimalService
+@inject NavigationManager NavigationManager
+@page "/animal/create"
+<ul>
+    <li><a href="javascript:void(0)" @onclick="NavigateToDefaultPage">Default</a></li>
+    <li><a href="javascript:void(0)" @onclick="NavigateToAnimalPage">Animal</a></li>
+</ul>
+<h3>Add New Animal</h3>
+
+<form>
+    <div class="form-group">
+        <label for="animalId">Animal ID</label>
+        <input type="number" class="form-control" id="animalId" @bind="@NewAnimal.AnimalId" />
+    </div>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" @bind="@NewAnimal.Name" />
+    </div>
+    <div class="form-group">
+        <label for="breed">Breed</label>
+        <input type="text" class="form-control" id="breed" @bind="@NewAnimal.Breed" />
+    </div>
+    <div class="form-group">
+        <label for="birthDate">Birth Date</label>
+        <input type="date" class="form-control" id="birthDate" @bind="@NewAnimal.BirthDate" />
+    </div>
+    <div class="form-group">
+        <label for="sex">Sex</label>
+        <input type="text" class="form-control" id="sex" @bind="@NewAnimal.Sex" />
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" class="form-control" id="price" @bind="@NewAnimal.Price" />
+    </div>
+    <div class="form-group">
+        <label for="status">Status</label>
+        <input type="text" class="form-control" id="status" @bind="@NewAnimal.Status" />
+    </div>
+    <button type="button" class="btn btn-primary" @onclick="FilterAnimals">Filter</button>
+
+    <button type="submit" class="btn btn-primary" @onclick="AddAnimal">Add Animal</button>
+</form>
+
+@code {
+
+    private void NavigateToDefaultPage()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    private void NavigateToAnimalPage()
+    {
+        NavigationManager.NavigateTo("/animal");
+    }
+
+    private Animal NewAnimal { get; set; } = new Animal();
+
+    private async Task AddAnimal()
+    {
+        await AnimalService.CreateAnimal(NewAnimal);
+        // Optional: Display a success message or navigate to the animal list page
+        NewAnimal = new Animal(); // Reset the form
+    }
+
+    private async Task FilterAnimals()
+    {
+        // Aquí puedes obtener el término de búsqueda de algún campo de entrada en el formulario
+        string searchTerm = ""; // Reemplaza "" con el valor del campo de búsqueda
+
+        List<Animal> filteredAnimals =  AnimalService.FilterAnimals(searchTerm);
+
+        // Aquí puedes hacer algo con los animales filtrados, como actualizar la cuadrícula
+    }
+
+}
+

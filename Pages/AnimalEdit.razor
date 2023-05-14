@@ -1,0 +1,76 @@
+﻿@using stGenetics.Services
+@using AnimalModel.Model
+@inject NavigationManager NavigationManager
+@inject IAnimalService AnimalService
+@page "/animal/edit"
+
+<h3>Edit Animal</h3>
+
+@if (Animal != null)
+{
+    <form>
+        <div class="form-group">
+            <label for="animalId">Animal ID</label>
+            <input type="number" class="form-control" id="animalId" value="@Animal.AnimalId" readonly />
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" @bind="@Animal.Name" />
+        </div>
+        <div class="form-group">
+            <label for="breed">Breed</label>
+            <input type="text" class="form-control" id="breed" @bind="@Animal.Breed" />
+        </div>
+        <div class="form-group">
+            <label for="birthDate">Birth Date</label>
+            <input type="date" class="form-control" id="birthDate" @bind="@Animal.BirthDate" />
+        </div>
+        <div class="form-group">
+            <label for="sex">Sex</label>
+            <input type="text" class="form-control" id="sex" @bind="@Animal.Sex" />
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" id="price" @bind="@Animal.Price" />
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <input type="text" class="form-control" id="status" @bind="@Animal.Status" />
+        </div>
+
+        <button type="submit" class="btn btn-primary" @onclick="UpdateAnimal">Update Animal</button>
+    </form>
+}
+else
+{
+    <p>Animal not found.</p>
+}
+
+<button @onclick="NavigateToAnimal">Back to Animal Grid</button>
+
+@code {
+    private Animal Animal { get; set; }
+    [Parameter] public int AnimalId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Animal = await AnimalService.GetSingleAnimal(AnimalId);
+    }
+
+    private async Task UpdateAnimal()
+    {
+        await AnimalService.UpdateAnimal(Animal);
+        // Optional: Display a success message or navigate back to the animal grid page
+        NavigationManager.NavigateTo("/animal");
+    }
+
+    private void NavigateToDefaultPage()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    private void NavigateToAnimal()
+    {
+        NavigationManager.NavigateTo("/animal");
+    }
+}

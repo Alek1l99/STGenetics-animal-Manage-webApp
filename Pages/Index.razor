@@ -1,0 +1,18 @@
+﻿@inject NavigationManager NavigationManager
+@page "/"
+<ul>
+    <li><a href="javascript:void(0)" @onclick="NavigateToDefaultPage">Default</a></li>
+    <li><a href="javascript:void(0)" @onclick="NavigateToAnimalPage">Animal</a></li>
+</ul>
+
+@code {
+    private void NavigateToDefaultPage()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    private void NavigateToAnimalPage()
+    {
+        NavigationManager.NavigateTo("/animal");
+    }
+}

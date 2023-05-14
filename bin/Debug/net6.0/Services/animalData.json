@@ -1,0 +1,184 @@
+{
+  "animals": [
+    {
+      "AnimalId": 1,
+      "Name": "Max",
+      "Breed": "Labrador Retriever",
+      "BirthDate": "2019-03-10",
+      "Sex": "Male",
+      "Price": 500,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 2,
+      "Name": "Bella",
+      "Breed": "Persian Cat",
+      "BirthDate": "2020-07-05",
+      "Sex": "Female",
+      "Price": 300,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 3,
+      "Name": "Rocky",
+      "Breed": "German Shepherd",
+      "BirthDate": "2018-11-20",
+      "Sex": "Male",
+      "Price": 550,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 4,
+      "Name": "Luna",
+      "Breed": "Maine Coon",
+      "BirthDate": "2021-01-15",
+      "Sex": "Female",
+      "Price": 350,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 5,
+      "Name": "Charlie",
+      "Breed": "Beagle",
+      "BirthDate": "2020-04-02",
+      "Sex": "Male",
+      "Price": 450,
+      "Status": "Inactive"
+    },
+    {
+      "AnimalId": 6,
+      "Name": "Lucy",
+      "Breed": "Bengal Cat",
+      "BirthDate": "2019-08-12",
+      "Sex": "Female",
+      "Price": 400,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 7,
+      "Name": "Cooper",
+      "Breed": "Golden Retriever",
+      "BirthDate": "2022-02-18",
+      "Sex": "Male",
+      "Price": 600,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 8,
+      "Name": "Milo",
+      "Breed": "Siamese Cat",
+      "BirthDate": "2020-06-25",
+      "Sex": "Male",
+      "Price": 320,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 9,
+      "Name": "Daisy",
+      "Breed": "Bulldog",
+      "BirthDate": "2017-09-05",
+      "Sex": "Female",
+      "Price": 550,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 10,
+      "Name": "Oliver",
+      "Breed": "Ragdoll Cat",
+      "BirthDate": "2021-03-08",
+      "Sex": "Male",
+      "Price": 380,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 11,
+      "Name": "Lola",
+      "Breed": "French Bulldog",
+      "BirthDate": "2019-05-14",
+      "Sex": "Female",
+      "Price": 600,
+      "Status": "Inactive"
+    },
+    {
+      "AnimalId": 12,
+      "Name": "Rocky",
+      "Breed": "Labrador Retriever",
+      "BirthDate": "2017-08-15",
+      "Sex": "Male",
+      "Price": 550,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 13,
+      "Name": "Leo",
+      "Breed": "Siberian Husky",
+      "BirthDate": "2022-04-28",
+      "Sex": "Male",
+      "Price": 550,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 14,
+      "Name": "Molly",
+      "Breed": "Dalmatian",
+      "BirthDate": "2020-09-10",
+      "Sex": "Female",
+      "Price": 400,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 15,
+      "Name": "Oscar",
+      "Breed": "Bichon Frise",
+      "BirthDate": "2019-12-03",
+      "Sex": "Male",
+      "Price": 350,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 16,
+      "Name": "Sophie",
+      "Breed": "Poodle",
+      "BirthDate": "2021-02-16",
+      "Sex": "Female",
+      "Price": 450,
+      "Status": "Inactive"
+    },
+    {
+      "AnimalId": 17,
+      "Name": "Maximus",
+      "Breed": "Doberman",
+      "BirthDate": "2018-06-20",
+      "Sex": "Male",
+      "Price": 600,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 18,
+      "Name": "Coco",
+      "Breed": "Persian Cat",
+      "BirthDate": "2020-10-05",
+      "Sex": "Female",
+      "Price": 320,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 19,
+      "Name": "Rocky",
+      "Breed": "Labrador Retriever",
+      "BirthDate": "2017-08-15",
+      "Sex": "Male",
+      "Price": 550,
+      "Status": "Active"
+    },
+    {
+      "AnimalId": 20,
+      "Name": "Mia",
+      "Breed": "Maine Coon",
+      "BirthDate": "2021-05-02",
+      "Sex": "Female",
+      "Price": 350,
+      "Status": "Active"
+    }
+  ]
+}

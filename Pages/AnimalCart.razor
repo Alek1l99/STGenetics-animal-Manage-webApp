@@ -1,0 +1,150 @@
+﻿@using stGenetics.Services
+@using AnimalModel.Model
+@inject IAnimalService AnimalService
+@inject NavigationManager NavigationManager
+@page "/animal/cart"
+<h3>Animal Cart</h3>
+
+<ul>
+    <li><a href="javascript:void(0)" @onclick="NavigateToDefaultPage">Default</a></li>
+    <li><a href="javascript:void(0)" @onclick="NavigateToAnimalPage">Animal</a></li>
+</ul>
+
+@if (SelectedAnimals != null && SelectedAnimals.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>AnimalId</th>
+                <th>Name</th>
+                <th>Breed</th>
+                <th>BirthDate</th>
+                <th>Sex</th>
+                <th>Price</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var animal in SelectedAnimals)
+            {
+                <tr>
+                    <td>@animal.AnimalId</td>
+                    <td>@animal.Name</td>
+                    <td>@animal.Breed</td>
+                    <td>@animal.BirthDate</td>
+                    <td>@animal.Sex</td>
+                    <td>@animal.Price</td>
+                    <td>@animal.Status</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5"></td>
+                <td>Total Price:</td>
+                <td>@TotalPrice</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div>
+        <button @onclick="PurchaseAnimals">Purchase Animals</button>
+    </div>
+    <div>
+        <p>Total Purchase Amount: @TotalPurchaseAmount</p>
+        <p>Discount Percentage: @CalculateDiscountPercentage()</p>
+        <p>Shipping Amount: @CalculateShippingAmount()</p>
+    </div>
+}
+else
+{
+    <p>No animals selected.</p>
+}
+
+@code {
+
+    private void NavigateToDefaultPage()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    private void NavigateToAnimalPage()
+    {
+        NavigationManager.NavigateTo("/animal");
+    }
+
+    private List<Animal> SelectedAnimals { get; set; }
+    private decimal TotalPrice => SelectedAnimals?.Sum(a => a.Price) ?? 0;
+
+    protected override void OnInitialized()
+    {
+        SelectedAnimals = GetSelectedAnimalsFromCart();
+    }
+
+    private List<Animal> GetSelectedAnimalsFromCart()
+    {
+        // Retrieve the selected animals from the shopping cart or any other data source
+        // For example, you can store the selected animals in a session variable or a database
+        // Return the list of selected animals
+        return new List<Animal>();
+    }
+
+    private void PurchaseAnimals()
+    {
+        // Perform the purchase operation for the selected animals
+        // For example, you can save the purchase details in the database
+        // Reset the selected animals list
+        SelectedAnimals = new List<Animal>();
+    }
+
+    private int SelectedAnimalCount => SelectedAnimals?.Count ?? 0;
+
+    private decimal TotalPurchaseAmount => CalculateTotalPurchaseAmount();
+
+    private decimal CalculateTotalPurchaseAmount()
+    {
+        // Lógica para calcular el monto total de la compra y aplicar los descuentos según las reglas de negocio
+        decimal totalAmount = SelectedAnimals?.Sum(a => a.Price) ?? 0;
+
+        // Aplicar descuento del 5% si la cantidad de animales seleccionados es mayor a 5
+        if (SelectedAnimalCount > 5)
+        {
+            decimal discountPercentage = 0.05m;
+            totalAmount -= totalAmount * discountPercentage;
+        }
+
+        // Aplicar descuento adicional del 3% si la cantidad de animales seleccionados es mayor a 10
+        if (SelectedAnimalCount > 10)
+        {
+            decimal additionalDiscountPercentage = 0.03m;
+            totalAmount -= totalAmount * additionalDiscountPercentage;
+        }
+
+        return totalAmount;
+    }
+
+    private decimal CalculateDiscountPercentage()
+    {
+        decimal discountPercentage = 0;
+
+        // Calcular el porcentaje de descuento aplicado
+        if (SelectedAnimalCount > 5)
+            discountPercentage += 5;
+
+        if (SelectedAnimalCount > 10)
+            discountPercentage += 3;
+
+        return discountPercentage;
+    }
+
+    private decimal CalculateShippingAmount()
+    {
+        // Calcular el monto de envío
+        decimal shippingAmount = SelectedAnimalCount > 20 ? 0 : 1000;
+
+        return shippingAmount;
+    }
+
+
+
+}
