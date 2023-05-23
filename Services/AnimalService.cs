@@ -9,25 +9,92 @@ namespace stGenetics.Services
 {
     public class AnimalService : IAnimalService
     {
-
         public List<Animal> Animals { get; set; }
         private readonly string _jsonPath = Path.Combine("Services", "animalData.json");
         public string SelectedDropdownValue { get; set; }
-
-        public AnimalService()
-        {
-            LoadAnimalData();
-        }
+        public List<Animal> SelectedAnimals { get; set; }
 
         public async Task<List<Animal>> GetAnimals()
         {
-            return Animals;
+            try
+            {
+                if (File.Exists(_jsonPath))
+                {
+                    string jsonData = File.ReadAllText(_jsonPath);
+                    var animals = JsonSerializer.Deserialize<List<Animal>>(jsonData);
+                    return animals;
+                }
+                else
+                {
+                    return new List<Animal>();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al cargar los datos del archivo JSON: {ex.Message}");
+                return new List<Animal>();
+            }
+        }
+        public void LoadAnimalData()
+        {
+            try
+            {
+                if (File.Exists(_jsonPath))
+                {
+                    string jsonData = File.ReadAllText(_jsonPath);
+                    Animals = JsonSerializer.Deserialize<List<Animal>>(jsonData);
+                }
+                else
+                {
+                    Animals = new List<Animal>
+            {
+                new Animal { AnimalId = 1, Name = "Animal 1", Breed = "Breed 1", BirthDate = DateTime.Now, Sex = "Male", Price = 100.0m, Status = "Active" },
+                new Animal { AnimalId = 2, Name = "Animal 2", Breed = "Breed 2", BirthDate = DateTime.Now, Sex = "Female", Price = 150.0m, Status = "Active" },
+                new Animal { AnimalId = 3, Name = "Animal 3", Breed = "Breed 3", BirthDate = DateTime.Now, Sex = "Male", Price = 200.0m, Status = "Inactive" }
+            };
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al cargar los datos del archivo JSON: {ex.Message}");
+                Animals = new List<Animal>();
+            }
+
+            Console.WriteLine("Animals loaded successfully."); 
         }
 
-        public async Task<Animal> GetSingleAnimal(int id)
+        public Animal GetSingleAnimal(int animalId)
         {
-            return Animals.FirstOrDefault(a => a.AnimalId == id);
+            // Logic to retrieve the details of an animal based on its ID
+            // You can query a database, call an external service, or any other data source
+            // Return the found animal or null if no animal was found with the specified ID
+
+            // Example implementation using an in-memory list of animals
+            var animal = Animals.FirstOrDefault(a => a.AnimalId == animalId);
+
+            if (animal != null)
+            {
+                // Check if the animal is already selected in the cart
+                if (SelectedAnimals.Any(a => a.AnimalId == animal.AnimalId))
+                {
+                    // If the animal is already in the cart, return null indicating an error
+                    return null;
+                }
+
+                // Apply a 5% discount if the number of selected animals is greater than or equal to 5
+                if (SelectedAnimals.Count >= 5)
+                {
+                    decimal discountPercentage = 0.05m;
+                    animal.Price -= animal.Price * discountPercentage;
+                }
+
+                // Add the animal to the list of selected animals
+                SelectedAnimals.Add(animal);
+            }
+
+            return animal;
         }
+
 
         public async Task CreateAnimal(Animal animal)
         {
@@ -76,19 +143,6 @@ namespace stGenetics.Services
                 animal.Breed.ToLowerInvariant().Contains(searchTerm) ||
                 animal.Sex.ToLowerInvariant().Contains(searchTerm) ||
                 animal.Status.ToLowerInvariant().Contains(searchTerm)).ToList();
-        }
-
-        public void LoadAnimalData()
-        {
-            if (File.Exists(_jsonPath))
-            {
-                string jsonData = File.ReadAllText(_jsonPath);
-                Animals = JsonSerializer.Deserialize<List<Animal>>(jsonData);
-            }
-            else
-            {
-                Animals = new List<Animal>();
-            }
         }
 
         private async Task SaveAnimalsToJson()

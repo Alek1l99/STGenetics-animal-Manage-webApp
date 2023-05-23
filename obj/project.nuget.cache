@@ -1,9 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Thgg3tIUSPCE/95IvjTF2dDiXpbUnUzK4MxRyKnAj1MTxpw7OQVBd0Orn+7/jDGxBAcfpOCoxZJRg0/7QE9eiQ==",
+  "dgSpecHash": "Q14jWkM8Y161z0ZW/iDw4jHETwTqNnfDuEQwFYVsjIEzHUDt/2XZryEkTdloGRgCKKBtg4PqfrXSvI4Unlk2Dg==",
   "success": true,
   "projectFilePath": "C:\\Users\\migue\\Desktop\\ocultp\\ST Genetics\\stGeneticsSolution\\stGenetics\\stGenetics.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\migue\\.nuget\\packages\\blazorise\\1.2.3\\blazorise.1.2.3.nupkg.sha512",
+    "C:\\Users\\migue\\.nuget\\packages\\blazorise.bootstrap\\1.2.3\\blazorise.bootstrap.1.2.3.nupkg.sha512",
+    "C:\\Users\\migue\\.nuget\\packages\\blazorise.icons.fontawesome\\1.2.3\\blazorise.icons.fontawesome.1.2.3.nupkg.sha512",
+    "C:\\Users\\migue\\.nuget\\packages\\blazorise.licensing\\1.1.0\\blazorise.licensing.1.1.0.nupkg.sha512",
     "C:\\Users\\migue\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.16\\microsoft.aspnetcore.authorization.6.0.16.nupkg.sha512",
     "C:\\Users\\migue\\.nuget\\packages\\microsoft.aspnetcore.components\\6.0.16\\microsoft.aspnetcore.components.6.0.16.nupkg.sha512",
     "C:\\Users\\migue\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\6.0.16\\microsoft.aspnetcore.components.analyzers.6.0.16.nupkg.sha512",
@@ -32,7 +36,8 @@
     "C:\\Users\\migue\\.nuget\\packages\\system.io.pipelines\\6.0.3\\system.io.pipelines.6.0.3.nupkg.sha512",
     "C:\\Users\\migue\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\migue\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
-    "C:\\Users\\migue\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512"
+    "C:\\Users\\migue\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
+    "C:\\Users\\migue\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.16\\microsoft.netcore.app.runtime.mono.browser-wasm.6.0.16.nupkg.sha512"
   ],
   "logs": []
 }

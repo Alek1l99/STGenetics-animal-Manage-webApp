@@ -3,11 +3,25 @@
 @inject IAnimalService AnimalService
 @inject NavigationManager NavigationManager
 @page "/animal/create"
-<ul>
-    <li><a href="javascript:void(0)" @onclick="NavigateToDefaultPage">Default</a></li>
-    <li><a href="javascript:void(0)" @onclick="NavigateToAnimalPage">Animal</a></li>
-</ul>
-<h3>Add New Animal</h3>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Create animal</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" @onclick="NavigateToDefaultPage">Hone</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" @onclick="NavigateToAnimalPage">Animal</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <form>
     <div class="form-group">
@@ -66,12 +80,12 @@
 
     private async Task FilterAnimals()
     {
-        // Aquí puedes obtener el término de búsqueda de algún campo de entrada en el formulario
-        string searchTerm = ""; // Reemplaza "" con el valor del campo de búsqueda
+        // Here you can get the search term from some input field in the form
+        string searchTerm = ""; // Replace "" with the value from the search field
 
-        List<Animal> filteredAnimals =  AnimalService.FilterAnimals(searchTerm);
+       List<Animal> filteredAnimals = AnimalService.FilterAnimals(searchTerm);
 
-        // Aquí puedes hacer algo con los animales filtrados, como actualizar la cuadrícula
+        // Here you can do something with the filtered animals, like updating the grid
     }
 
 }

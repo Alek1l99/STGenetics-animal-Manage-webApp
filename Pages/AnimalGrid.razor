@@ -1,68 +1,95 @@
 ﻿@using stGenetics.Services
 @using AnimalModel.Model
 @inject NavigationManager NavigationManager
-@inject IAnimalService AnimalService
+@inject stGenetics.Services.IAnimalService AnimalService
 @page "/animal"
 
-<h3>Animals</h3>
 
-<ul>
-    <li><a href="javascript:void(0)" @onclick="NavigateToDefaultPage">Default</a></li>
-    <li><a href="javascript:void(0)" @onclick="NavigateToCreatePage">Create Animal</a></li>
-    <li><a href="javascript:void(0)" @onclick="NavigateToEditPage">Edit Animal</a></li>
-    <li><a href="javascript:void(0)" @onclick="NavigateToCartPage">Cart</a></li>
-</ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Animals</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" @onclick="NavigateToDefaultPage">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" @onclick="NavigateToCreatePage">Create Animal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  href="javascript:void(0)" @onclick="NavigateToEditPage">Edit Animal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" @onclick="NavigateToCartPage">Cart</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 
 <div>
     <label for="filter">Filter:</label>
     <input type="text" id="filter" @bind="@FilterText" />
-    <button @onclick="FilterAnimals">Filter</button>
+    <button @onclick="() => FilterAnimals(FilterText)" class="btn btn-primary">Filter</button>
 </div>
 
-@if (Animal != null)
-{
-    <form>
-        <div class="form-group">
-            <label for="animalId">Animal ID</label>
-            <input type="number" class="form-control" id="animalId" value="@Animal.AnimalId" readonly />
-        </div>
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" @bind="@Animal.Name" />
-        </div>
-        <div class="form-group">
-            <label for="breed">Breed</label>
-            <input type="text" class="form-control" id="breed" @bind="@Animal.Breed" />
-        </div>
-        <div class="form-group">
-            <label for="birthDate">Birth Date</label>
-            <input type="date" class="form-control" id="birthDate" @bind="@Animal.BirthDate" />
-        </div>
-        <div class="form-group">
-            <label for="sex">Sex</label>
-            <input type="text" class="form-control" id="sex" @bind="@Animal.Sex" />
-        </div>
-        <div class="form-group">
-            <label for="price">Price</label>
-            <input type="number" class="form-control" id="price" @bind="@Animal.Price" />
-        </div>
-        <div class="form-group">
-            <label for="status">Status</label>
-            <input type="text" class="form-control" id="status" @bind="@Animal.Status" />
-        </div>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>AnimalId</th>
+                <th>Name</th>
+                <th>Breed</th>
+                <th>BirthDate</th>
+                <th>Sex</th>
+                <th>Price</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (FilteredAnimals != null && FilteredAnimals.Any())
+            {
+                @foreach (var animal in FilteredAnimals)
+                {
+                    <tr>
+                        <td>@animal.AnimalId</td>
+                        <td>@animal.Name</td>
+                        <td>@animal.Breed</td>
+                        <td>@animal.BirthDate</td>
+                        <td>@animal.Sex</td>
+                        <td>@animal.Price</td>
+                        <td>@animal.Status</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7">No animals found.</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5"></td>
+                <td class="text-bold">Total Price:</td>
+                <td>@TotalPrice</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
 
-        <button type="submit" class="btn btn-primary" @onclick="UpdateAnimal">Update Animal</button>
-    </form>
-}
-else
-{
-    <p>Animal not found.</p>
-}
-
-<button @onclick="AddSelectedAnimalsToCart">Add Selected Animals to Cart</button>
+    <button @onclick="AddSelectedAnimalsToCart" class="btn btn-primary">Add Selected Animals to Cart</button>
 
 
 @code {
+
+    // Navigation methods
 
     private void NavigateToDefaultPage()
     {
@@ -84,35 +111,74 @@ else
         NavigationManager.NavigateTo("/animal/cart");
     }
 
+    // Animal properties and parameter
+
     private Animal Animal { get; set; }
     [Parameter] public int AnimalId { get; set; }
 
+    // Initialization and loading of animals
+
     protected override async Task OnInitializedAsync()
     {
-        Animal = await AnimalService.GetSingleAnimal(AnimalId);
+        Animals = await AnimalService.GetAnimals();
+        CalculateTotalPages();
+        SetCurrentPage(1);
     }
-
-    private async Task UpdateAnimal()
-    {
-        await AnimalService.UpdateAnimal(Animal);
-        // Optional: Display a success message or navigate back to the animal grid page
-        NavigationManager.NavigateTo("/animalgrid");
-    }
-
-    private List<Animal> Animals { get; set; }
-    private List<Animal> SelectedAnimals { get; set; } = new List<Animal>();
-    private string FilterText { get; set; }
-    private decimal TotalPrice => SelectedAnimals.Sum(a => a.Price);
 
     private async Task LoadAnimals()
     {
+        // Load the list of animals from the service or any other data source
         Animals = await AnimalService.GetAnimals();
+
+        // Assign the loaded animals to the filtered and current animals lists
+        FilteredAnimals = new List<Animal>(Animals);
+        SetCurrentPage(1);
     }
 
-    private async Task FilterAnimals()
+
+
+    // Edit animal method
+
+    private void EditAnimal(Animal animal)
     {
-        Animals = AnimalService.FilterAnimals(FilterText);
+        // Navigate to the animal edit component and pass the animal as a parameter
+        NavigationManager.NavigateTo($"/animal/edit/{animal.AnimalId}");
     }
+
+    // Animal lists and filtering
+
+    private List<Animal> SelectedAnimals { get; set; } = new List<Animal>();
+    private List<Animal> Animals { get; set; }
+    private List<Animal> FilteredAnimals { get; set; }
+    private string FilterText { get; set; }
+
+    // Total price calculation
+
+    private decimal TotalPrice => SelectedAnimals.Sum(a => a.Price);
+    
+    // Animal filtering
+
+    public List<Animal> FilterAnimals(string searchTerm)
+    {
+        if (!string.IsNullOrWhiteSpace(searchTerm))
+        {
+            searchTerm = searchTerm.ToLowerInvariant();
+
+            FilteredAnimals = Animals.Where(animal =>
+                animal.Name.ToLowerInvariant().Contains(searchTerm) ||
+                animal.Breed.ToLowerInvariant().Contains(searchTerm) ||
+                animal.Sex.ToLowerInvariant().Contains(searchTerm) ||
+                animal.Status.ToLowerInvariant().Contains(searchTerm)).ToList();
+        }
+        else
+        {
+            FilteredAnimals = Animals;
+        }
+
+        return FilteredAnimals;
+    }
+
+    // Animal selection and cart
 
     private void ToggleAnimalSelection(Animal animal)
     {
@@ -127,5 +193,23 @@ else
         // Add the selected animals to the shopping cart or perform any other desired action
         // For example, you can navigate to a separate shopping cart page and pass the selected animals as a parameter
         NavigationManager.NavigateTo($"cart?animals={string.Join(",", SelectedAnimals.Select(a => a.AnimalId))}");
+    }
+
+    // Pagination
+
+    private const int ItemsPerPage = 10; // Number of items per page
+    private int currentPage = 1; // Current page
+    private List<Animal> currentAnimals; // Animals to display on the current page
+    private int totalPages; // Total number of pages
+
+    private void CalculateTotalPages()
+    {
+        totalPages = (int)Math.Ceiling((double)FilteredAnimals.Count / ItemsPerPage);
+    }
+
+    private void SetCurrentPage(int page)
+    {
+        currentPage = page;
+        currentAnimals = FilteredAnimals.Skip((currentPage - 1) * ItemsPerPage).Take(ItemsPerPage).ToList();
     }
 }

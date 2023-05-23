@@ -6,7 +6,7 @@ namespace stGenetics.Services
     {
         List<Animal> Animals { get; set; }
         Task<List<Animal>> GetAnimals();
-        Task<Animal> GetSingleAnimal(int id);
+        Animal GetSingleAnimal(int animalId);
         Task CreateAnimal(Animal animal);
         Task UpdateAnimal(Animal animal);
         Task DeleteAnimal(int id);

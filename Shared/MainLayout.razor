@@ -3,16 +3,23 @@
 <!-- MainLayout.razor -->
 <div>
     <header>
-        <!-- Barra de navegación -->
+        <!-- Navigation bar -->
         <NavMenu />
     </header>
 
     <div class="content">
-        <!-- Contenido de la página actual -->
+        <!-- Current page content -->
         @Body
     </div>
 
-    <footer>
-        <!-- Pie de página -->
+    <footer class="bg-dark text-white fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="text-center font-weight-bold">Developed by alek1l99 for ST Genetics Animal Management Web App</h3>
+                </div>
+            </div>
+        </div>
     </footer>
+
 </div>

@@ -9,49 +9,49 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = stGenetics
 build_property.RootNamespace = stGenetics
-build_property.ProjectDir = C:\Users\migue\Desktop\ocultp\ST Genetics\stGeneticsSolution\stGenetics\
+build_property.ProjectDir = c:\Users\migue\Desktop\ocultp\ST Genetics\stGeneticsSolution\stGenetics\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\migue\Desktop\ocultp\ST Genetics\stGeneticsSolution\stGenetics
+build_property.MSBuildProjectDirectory = c:\Users\migue\Desktop\ocultp\ST Genetics\stGeneticsSolution\stGenetics
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/App.razor]
+[c:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Pages/AnimalCart.razor]
+[c:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Pages/AnimalCart.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQW5pbWFsQ2FydC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Pages/AnimalCreate.razor]
+[c:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Pages/AnimalCreate.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQW5pbWFsQ3JlYXRlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Pages/AnimalEdit.razor]
+[c:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Pages/AnimalEdit.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQW5pbWFsRWRpdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Pages/AnimalGrid.razor]
+[c:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Pages/AnimalGrid.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQW5pbWFsR3JpZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Pages/Index.razor]
+[c:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Shared/SurveyPrompt.razor]
+[c:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/_Imports.razor]
+[c:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Shared/MainLayout.razor]
+[c:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-h45jtfxrbw
 
-[C:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Shared/NavMenu.razor]
+[c:/Users/migue/Desktop/ocultp/ST Genetics/stGeneticsSolution/stGenetics/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-vqbiivg0re

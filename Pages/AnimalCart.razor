@@ -3,66 +3,94 @@
 @inject IAnimalService AnimalService
 @inject NavigationManager NavigationManager
 @page "/animal/cart"
-<h3>Animal Cart</h3>
-
-<ul>
-    <li><a href="javascript:void(0)" @onclick="NavigateToDefaultPage">Default</a></li>
-    <li><a href="javascript:void(0)" @onclick="NavigateToAnimalPage">Animal</a></li>
-</ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Cart</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" @onclick="NavigateToDefaultPage">Hone</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" @onclick="NavigateToAnimalPage">Animal</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 @if (SelectedAnimals != null && SelectedAnimals.Any())
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>AnimalId</th>
-                <th>Name</th>
-                <th>Breed</th>
-                <th>BirthDate</th>
-                <th>Sex</th>
-                <th>Price</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var animal in SelectedAnimals)
-            {
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@animal.AnimalId</td>
-                    <td>@animal.Name</td>
-                    <td>@animal.Breed</td>
-                    <td>@animal.BirthDate</td>
-                    <td>@animal.Sex</td>
-                    <td>@animal.Price</td>
-                    <td>@animal.Status</td>
+                    <th>AnimalId</th>
+                    <th>Name</th>
+                    <th>Breed</th>
+                    <th>BirthDate</th>
+                    <th>Sex</th>
+                    <th>Price</th>
+                    <th>Status</th>
                 </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="5"></td>
-                <td>Total Price:</td>
-                <td>@TotalPrice</td>
-            </tr>
-        </tfoot>
-    </table>
-
-    <div>
-        <button @onclick="PurchaseAnimals">Purchase Animals</button>
+            </thead>
+            <tbody>
+                @foreach (var animal in SelectedAnimals)
+                {
+                    <tr>
+                        <td>@animal.AnimalId</td>
+                        <td>@animal.Name</td>
+                        <td>@animal.Breed</td>
+                        <td>@animal.BirthDate</td>
+                        <td>@animal.Sex</td>
+                        <td>@animal.Price</td>
+                        <td>@animal.Status</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5"></td>
+                    <td class="text-bold">Total Price:</td>
+                    <td>@TotalPrice</td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
-    <div>
-        <p>Total Purchase Amount: @TotalPurchaseAmount</p>
-        <p>Discount Percentage: @CalculateDiscountPercentage()</p>
-        <p>Shipping Amount: @CalculateShippingAmount()</p>
+
+    <div class="row">
+        <div class="col-md-6">
+            <button class="btn btn-primary" @onclick="PurchaseAnimals">Purchase Animals</button>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <p>Total Purchase Amount: @TotalPurchaseAmount</p>
+                    <p>Discount Percentage: @CalculateDiscountPercentage()</p>
+                    <p>Shipping Amount: @CalculateShippingAmount()</p>
+                </div>
+            </div>
+        </div>
     </div>
 }
 else
 {
-    <p>No animals selected.</p>
+
+    <div class="alert alert-danger" role="alert">
+<h2 class="text-center">
+    <i class="fas fa-exclamation-circle"></i> No animals selected.
+</h2>
+        </div>
+  
+
+
 }
 
 @code {
-
     private void NavigateToDefaultPage()
     {
         NavigationManager.NavigateTo("/");
@@ -83,10 +111,28 @@ else
 
     private List<Animal> GetSelectedAnimalsFromCart()
     {
-        // Retrieve the selected animals from the shopping cart or any other data source
-        // For example, you can store the selected animals in a session variable or a database
-        // Return the list of selected animals
-        return new List<Animal>();
+        var selectedAnimals = new List<Animal>();
+
+        // Get animal IDs from the URL
+        var animalsQueryString = NavigationManager.Uri.Split('?').LastOrDefault()?.Split('=').LastOrDefault();
+        if (!string.IsNullOrEmpty(animalsQueryString))
+        {
+            var animalIds = animalsQueryString.Split(',');
+            foreach (var animalId in animalIds)
+            {
+                // Get details of each animal by its ID and add it to the selected animals list
+                if (int.TryParse(animalId, out int id))
+                {
+                    var animal = AnimalService.GetSingleAnimal(id);
+                    if (animal != null)
+                    {
+                        selectedAnimals.Add(animal);
+                    }
+                }
+            }
+        }
+
+        return selectedAnimals;
     }
 
     private void PurchaseAnimals()
@@ -103,17 +149,17 @@ else
 
     private decimal CalculateTotalPurchaseAmount()
     {
-        // Lógica para calcular el monto total de la compra y aplicar los descuentos según las reglas de negocio
+        // Logic to calculate the total purchase amount and apply discounts according to the business rules
         decimal totalAmount = SelectedAnimals?.Sum(a => a.Price) ?? 0;
 
-        // Aplicar descuento del 5% si la cantidad de animales seleccionados es mayor a 5
+        // Apply a 5% discount if the selected animal count is greater than 5
         if (SelectedAnimalCount > 5)
         {
             decimal discountPercentage = 0.05m;
             totalAmount -= totalAmount * discountPercentage;
         }
 
-        // Aplicar descuento adicional del 3% si la cantidad de animales seleccionados es mayor a 10
+        // Apply an additional 3% discount if the selected animal count is greater than 10
         if (SelectedAnimalCount > 10)
         {
             decimal additionalDiscountPercentage = 0.03m;
@@ -127,7 +173,7 @@ else
     {
         decimal discountPercentage = 0;
 
-        // Calcular el porcentaje de descuento aplicado
+        // Calculate the applied discount percentage
         if (SelectedAnimalCount > 5)
             discountPercentage += 5;
 
@@ -139,12 +185,10 @@ else
 
     private decimal CalculateShippingAmount()
     {
-        // Calcular el monto de envío
+        // Calculate the shipping amount
         decimal shippingAmount = SelectedAnimalCount > 20 ? 0 : 1000;
 
         return shippingAmount;
     }
-
-
 
 }
